@@ -1,0 +1,14 @@
+Reservation:
+-id
+-idClient (caracteres)
+-nb passager
+-dateHeure
+-idHotel
+
+Back-Office (Aro Irintsoa)
+Formulaire pour faire une reservation dans le back office.
+
+Script d'insertion hotel (ou fromilaire)
+
+Front-Office (Anja Itokiana)
+Liste reservation : filtre par date

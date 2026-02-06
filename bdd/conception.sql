@@ -20,8 +20,7 @@ create Table parametre(
 
 create table hotel (
     id serial primary key,
-    nom VARCHAR(100) NOT NULL,
-    adresse VARCHAR(255) NOT NULL
+    nom VARCHAR(100) NOT NULL
 );
 
 CREATE hotelDistance (
