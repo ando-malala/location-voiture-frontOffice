@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.location</groupId>
-	<artifactId>app</artifactId>
+	<artifactId>frontOffice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>app</name>
+	<name>frontOffice</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -77,6 +77,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<!-- Ensure consistent WAR name -->
+		<finalName>frontOffice</finalName>
 	</build>
 
 </project>
