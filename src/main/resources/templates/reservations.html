@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Liste des réservations</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f2f2f2; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+<h1>Liste des réservations</h1>
+
+<form method="get" th:action="@{/reservations}">
+    <label for="date">Filtrer par date :</label>
+    <input type="date" id="date" name="date" th:value="${selectedDate}" />
+    <button type="submit">Filtrer</button>
+    <a th:href="@{/reservations}">Effacer</a>
+</form>
+
+<!-- Show active filter and total count -->
+<div th:if="${selectedDate} and ${selectedDate} != ''">
+    <strong>Filtré pour le :</strong> <span th:text="${selectedDate}"></span>
+    <span th:if="${#lists.isEmpty(reservations)}"> — Aucun résultat</span>
+    <span th:if="${!#lists.isEmpty(reservations)}"> — <span th:text="${#lists.size(reservations)}"></span> résultat(s)</span>
+</div>
+
+<div th:if="${error}" class="error" th:text="${error}"></div>
+<div th:if="${hotelFetchError}" class="error" th:text="${hotelFetchError}"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Hôtel</th>
+        <th>Client</th>
+        <th>Passagers</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="res : ${reservations}">
+        <td th:text="${res.id}"></td>
+        <td th:text="${#maps.get(hotels, res.idHotel)} ?: 'Hôtel #' + ${res.idHotel}"></td>
+        <td th:text="${res.idClient}"></td>
+        <td th:text="${res.nbPassager}"></td>
+        <!-- Display date only (ISO) -->
+        <td th:text="${res.dateHeure != null && res.dateHeure.toLocalDate() != null ? res.dateHeure.toLocalDate() : ''}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(reservations)}">
+        <td colspan="5">Aucune réservation trouvée.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
