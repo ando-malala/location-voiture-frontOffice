@@ -36,7 +36,7 @@ create table reservation (
     idHotel INT NOT NULL,
     infoClient VARCHAR(255) NOT NULL,
     nbPassager INT NOT NULL,
-    dateHeure TIME NOT NULL, -- arrive des clients à l'aéroport
+    dateHeure DATE NOT NULL, -- arrive des clients à l'aéroport
     FOREIGN KEY (idHotel) REFERENCES hotel(id)
 );
 
