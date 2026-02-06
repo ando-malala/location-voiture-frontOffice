@@ -34,7 +34,7 @@ CREATE hotelDistance (
 create table reservation (
     id serial primary key,
     idHotel INT NOT NULL,
-    infoClient VARCHAR(255) NOT NULL,
+    idClient VARCHAR(255) NOT NULL,
     nbPassager INT NOT NULL,
     dateHeure DATE NOT NULL, -- arrive des clients à l'aéroport
     FOREIGN KEY (idHotel) REFERENCES hotel(id)
