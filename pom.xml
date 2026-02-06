@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.location</groupId>
-	<artifactId>app</artifactId>
+	<artifactId>frontOffice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>app</name>
+	<packaging>war</packaging>
+	<name>frontOffice</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -39,11 +40,24 @@
 			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
+		<!-- Thymeleaf for server-side rendering of the reservations view -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- Provided Tomcat for external container deployment -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
@@ -63,6 +77,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<!-- Ensure consistent WAR name -->
+		<finalName>frontOffice</finalName>
 	</build>
 
 </project>
