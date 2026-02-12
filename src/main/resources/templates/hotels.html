@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>FrontOffice — Hôtels</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f2f2f2; }
+        .error { color: red; margin: 10px 0; }
+        .btn { display: inline-block; padding: 8px 16px; background: #28a745; color: white;
+               text-decoration: none; border-radius: 4px; margin: 10px 0; }
+        .btn:hover { background: #218838; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a th:href="@{/reservations}">Réservations</a>
+    <a th:href="@{/hotels}">Hôtels</a>
+</nav>
+
+<h1>FrontOffice — Liste des hôtels</h1>
+
+<a class="btn" th:href="@{/hotels/new}">+ Nouvel hôtel</a>
+
+<div th:if="${error}" class="error" th:text="${error}"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Nom</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="hotel : ${hotels}">
+        <td th:text="${hotel.id}"></td>
+        <td th:text="${hotel.nom}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(hotels)}">
+        <td colspan="2">Aucun hôtel trouvé.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

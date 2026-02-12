@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>FrontOffice — Nouvel hôtel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .error { color: red; margin: 10px 0; }
+        form { max-width: 500px; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 20px; background: #007bff; color: white;
+                 border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #0056b3; }
+        .back-link { display: inline-block; margin-top: 15px; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a th:href="@{/reservations}">Réservations</a>
+    <a th:href="@{/hotels}">Hôtels</a>
+</nav>
+
+<h1>Nouvel hôtel</h1>
+
+<div th:if="${error}" class="error" th:text="${error}"></div>
+
+<form method="post" th:action="@{/hotels/save}">
+
+    <label for="nom">Nom de l'hôtel :</label>
+    <input type="text" id="nom" name="nom" required placeholder="ex: Hôtel Madagascar" />
+
+    <button type="submit">Créer l'hôtel</button>
+</form>
+
+<a class="back-link" th:href="@{/hotels}">&larr; Retour à la liste</a>
+
+</body>
+</html>
