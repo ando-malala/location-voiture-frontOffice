@@ -28,7 +28,6 @@
 </div>
 
 <div th:if="${error}" class="error" th:text="${error}"></div>
-<div th:if="${hotelFetchError}" class="error" th:text="${hotelFetchError}"></div>
 
 <table>
     <thead>
@@ -43,11 +42,10 @@
     <tbody>
     <tr th:each="res : ${reservations}">
         <td th:text="${res.id}"></td>
-        <td th:text="${#maps.get(hotels, res.idHotel)} ?: 'Hôtel #' + ${res.idHotel}"></td>
+        <td th:text="${res.hotel != null ? res.hotel.nom : 'N/A'}"></td>
         <td th:text="${res.idClient}"></td>
         <td th:text="${res.nbPassager}"></td>
-        <!-- Display date only (ISO) -->
-        <td th:text="${res.dateHeure != null && res.dateHeure.toLocalDate() != null ? res.dateHeure.toLocalDate() : ''}"></td>
+        <td th:text="${res.dateHeure}"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(reservations)}">
         <td colspan="5">Aucune réservation trouvée.</td>

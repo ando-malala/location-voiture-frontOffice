@@ -1,18 +1,18 @@
 package com.location.app.web.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReservationDto {
 
     private Long id;
-    private Integer idHotel;
+    private HotelDto hotel;
     private String idClient;
     private Integer nbPassager;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime dateHeure;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateHeure;
 
     public ReservationDto() {}
 
@@ -24,12 +24,12 @@ public class ReservationDto {
         this.id = id;
     }
 
-    public Integer getIdHotel() {
-        return idHotel;
+    public HotelDto getHotel() {
+        return hotel;
     }
 
-    public void setIdHotel(Integer idHotel) {
-        this.idHotel = idHotel;
+    public void setHotel(HotelDto hotel) {
+        this.hotel = hotel;
     }
 
     public String getIdClient() {
@@ -48,11 +48,11 @@ public class ReservationDto {
         this.nbPassager = nbPassager;
     }
 
-    public LocalDateTime getDateHeure() {
+    public LocalDate getDateHeure() {
         return dateHeure;
     }
 
-    public void setDateHeure(LocalDateTime dateHeure) {
+    public void setDateHeure(LocalDate dateHeure) {
         this.dateHeure = dateHeure;
     }
 }
