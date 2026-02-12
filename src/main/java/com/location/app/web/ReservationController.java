@@ -23,7 +23,7 @@ public class ReservationController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${BACKOFFICE_API_URL:http://localhost:8080/reservation}")
+    @Value("${backoffice.api.base-url:http://localhost:8080/reservation}")
     private String apiBaseUrl;
 
     public ReservationController(RestTemplate restTemplate) {
@@ -56,7 +56,7 @@ public class ReservationController {
             reservations = resp.getBody() != null ? resp.getBody() : Collections.emptyList();
         } catch (Exception ex) {
             model.addAttribute("error",
-                    "Impossible de récupérer les réservations depuis le backoffice : " + ex.getMessage());
+                    "Impossible de récupérer les réservations : " + ex.getMessage());
         }
 
         model.addAttribute("reservations", reservations);
