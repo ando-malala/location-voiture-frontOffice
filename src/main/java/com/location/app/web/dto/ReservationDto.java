@@ -7,7 +7,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ReservationDto {
 
     private Long id;
-    private Integer idHotel;
+
+    /** L'hôtel renvoyé en objet imbriqué par le back-office. */
+    private HotelDto hotel;
+
     private String idClient;
     private Integer nbPassager;
 
@@ -16,43 +19,18 @@ public class ReservationDto {
 
     public ReservationDto() {}
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public HotelDto getHotel() { return hotel; }
+    public void setHotel(HotelDto hotel) { this.hotel = hotel; }
 
-    public Integer getIdHotel() {
-        return idHotel;
-    }
+    public String getIdClient() { return idClient; }
+    public void setIdClient(String idClient) { this.idClient = idClient; }
 
-    public void setIdHotel(Integer idHotel) {
-        this.idHotel = idHotel;
-    }
+    public Integer getNbPassager() { return nbPassager; }
+    public void setNbPassager(Integer nbPassager) { this.nbPassager = nbPassager; }
 
-    public String getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(String idClient) {
-        this.idClient = idClient;
-    }
-
-    public Integer getNbPassager() {
-        return nbPassager;
-    }
-
-    public void setNbPassager(Integer nbPassager) {
-        this.nbPassager = nbPassager;
-    }
-
-    public LocalDateTime getDateHeure() {
-        return dateHeure;
-    }
-
-    public void setDateHeure(LocalDateTime dateHeure) {
-        this.dateHeure = dateHeure;
-    }
+    public LocalDateTime getDateHeure() { return dateHeure; }
+    public void setDateHeure(LocalDateTime dateHeure) { this.dateHeure = dateHeure; }
 }

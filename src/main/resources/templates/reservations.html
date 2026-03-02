@@ -4,53 +4,61 @@
     <meta charset="UTF-8" />
     <title>frontOffice - Liste des réservations</title>
     <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
         table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background: #f2f2f2; }
-        .error { color: red; }
+        tr:nth-child(even) { background: #fafafa; }
+        .error { color: red; margin: 10px 0; padding: 8px; border: 1px solid red; background: #fff0f0; }
+        .filter-form { margin: 15px 0; }
+        .info { color: #555; margin: 5px 0; }
     </style>
 </head>
 <body>
 <h1>frontOffice — Liste des réservations</h1>
 
-<form method="get" th:action="@{/reservations}">
-    <label for="date">Filtrer par date :</label>
-    <input type="date" id="date" name="date" th:value="${selectedDate}" />
-    <button type="submit">Filtrer</button>
-    <a th:href="@{/reservations}">Effacer</a>
-</form>
+<div class="filter-form">
+    <form method="get" th:action="@{/reservations}">
+        <label for="date">Filtrer par date :</label>
+        <input type="date" id="date" name="date" th:value="${selectedDate}" />
+        <button type="submit">Filtrer</button>
+        <a th:href="@{/reservations}">Effacer</a>
+    </form>
+</div>
 
-<!-- Show active filter and total count -->
-<div th:if="${selectedDate} and ${selectedDate} != ''">
+<!-- Filtre actif et nombre de résultats -->
+<div class="info" th:if="${selectedDate != null and selectedDate != ''}">
     <strong>Filtré pour le :</strong> <span th:text="${selectedDate}"></span>
     <span th:if="${#lists.isEmpty(reservations)}"> — Aucun résultat</span>
-    <span th:if="${!#lists.isEmpty(reservations)}"> — <span th:text="${#lists.size(reservations)}"></span> résultat(s)</span>
+    <span th:if="${not #lists.isEmpty(reservations)}">
+        — <span th:text="${#lists.size(reservations)}"></span> résultat(s)
+    </span>
 </div>
 
 <div th:if="${error}" class="error" th:text="${error}"></div>
-<div th:if="${hotelFetchError}" class="error" th:text="${hotelFetchError}"></div>
 
 <table>
     <thead>
     <tr>
         <th>#</th>
         <th>Hôtel</th>
+        <th>Lieu de l'hôtel</th>
         <th>Client</th>
         <th>Passagers</th>
-        <th>Date</th>
+        <th>Date d'arrivée à l'aéroport</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="res : ${reservations}">
         <td th:text="${res.id}"></td>
-        <td th:text="${#maps.get(hotels, res.idHotel)} ?: 'Hôtel #' + ${res.idHotel}"></td>
+        <td th:text="${res.hotel != null ? res.hotel.nom : '-'}"></td>
+        <td th:text="${res.hotel != null and res.hotel.lieu != null ? res.hotel.lieu.nom : '-'}"></td>
         <td th:text="${res.idClient}"></td>
         <td th:text="${res.nbPassager}"></td>
-        <!-- Display date only (ISO) -->
-        <td th:text="${res.dateHeure != null && res.dateHeure.toLocalDate() != null ? res.dateHeure.toLocalDate() : ''}"></td>
+        <td th:text="${res.dateHeure != null ? #temporals.format(res.dateHeure, 'dd/MM/yyyy HH:mm') : '-'}"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(reservations)}">
-        <td colspan="5">Aucune réservation trouvée.</td>
+        <td colspan="6" style="text-align:center;">Aucune réservation trouvée.</td>
     </tr>
     </tbody>
 </table>
